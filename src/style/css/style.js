@@ -4,7 +4,7 @@ const styles = {
     textField: {
       width: "100%",
       marginBottom: 36,
-      backgroundColor: 'rgba(0,0,0,0.3)',
+      backgroundColor: 'rgba(0,0,0,0.5)',
       padding: 7,
       borderRadius: 4,
       boxSizing: "border-box",
@@ -33,7 +33,7 @@ const styles = {
         padding: "50px 35px 35px 35px",
         border: "2px solid #e0e0e0",
         borderRadius: 8,
-        backgroundColor: 'rgba(0,0,0,0.2)',
+        backgroundColor: 'rgba(0,0,0,0.4)',
     },
     textHeadline: {
         marginBottom: 30,

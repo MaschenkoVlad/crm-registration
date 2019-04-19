@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux'
 import { signInFunc } from '../actions/actions'
-
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
