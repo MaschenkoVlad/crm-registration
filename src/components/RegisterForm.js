@@ -3,8 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux'
 import { signInFunc } from '../actions/actions'
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import {Button, TextField} from '@material-ui/core';
 import styles from '../style/css/style'
 
 const validate = ( values ) => {
@@ -27,52 +26,46 @@ const input = ( props ) => {
             <TextField {...props.input} 
                   type={props.type} 
                   placeholder={props.placeholder} 
-                  value={props.value} 
-                  style={styles.textField} 
-                  InputProps={{
-                    style: {
-                        color: "#f5f5f5",
-                        fontFamily: "Comic Sans MS",
-                        fontSize: 16
-                    }
-                  }} />
-            {/* сначала проверяет, где есть какие-либо данные, хранящиеся внутри объекта error. 
-            Если это так, он проверяет, взаимодействовал ли пользователь с полем ввода. 
-            Если это так, то приложение вернет данные, хранящиеся внутри объекта error. */}
-            {meta.error && meta.touched && <div style={styles.errorField}>{meta.error}</div>}
+                  value={props.value}  
+                  variant="outlined" />
+                  
+            {meta.error && meta.touched && <div>{meta.error}</div>}
         </Fragment>
     )
 }
 
-let Form = ( props ) => {
+let RegistrForm = ( props ) => {
   const { pristine, submitting, signInFunc  } = props;
   return (
-      <form onSubmit={ (e)=>{ signInFunc(e.target.elements.login.value, 
-                                        e.target.elements.email.value ); }} 
-            autoComplete="off" >
+      <form onSubmit={(e)=>{ signInFunc(e.target.elements.name.value, 
+                                        e.target.elements.email.value,
+                                        e.target.elements.password.value, 
+                                        e.target.elements.password_confirm.value,
+                                        ); e.preventDefault();}} 
+            style={styles.formContainer}>
 
-        <div style={styles.inputBox}>
+        <div style={styles.input}>
           <Field name="name" 
                  component={input} 
                  label="name" 
                  type="text"
                  placeholder="name" /> 
         </div>
-        <div style={styles.inputBox}>
+        <div style={styles.input}>
           <Field name="email" 
                  component={input} 
                  label="email" 
                  type="text"
                  placeholder="email" /> 
         </div>
-        <div style={styles.inputBox}>
+        <div style={styles.input}>
           <Field name="password" 
                  component={input} 
                  label="password" 
                  type="password"
                  placeholder="password" /> 
         </div>
-        <div style={styles.inputBox}>
+        <div style={styles.input}>
           <Field name="password_confirm" 
                  component={input} 
                  label="password_confirm" 
@@ -80,18 +73,15 @@ let Form = ( props ) => {
                  placeholder="password_confirm" />
         </div>
         <div>
-          <Button type="submit" 
-                  disabled={pristine || submitting}  
-                  fullWidth 
-                  variant="contained" >SIGN IN</Button>
+          <Button type="submit" variant="contained" color="primary" fullWidth disabled={pristine || submitting} >SIGN IN</Button>
         </div>
       </form>
   )
 }
 
-Form = reduxForm({
+RegistrForm = reduxForm({
   form: 'signIn',
   validate,
-})(Form);
+})(RegistrForm);
 
-export default connect( null, { signInFunc } )( Form );
+export default connect( null, { signInFunc } )( RegistrForm );

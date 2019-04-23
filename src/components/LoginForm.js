@@ -1,16 +1,15 @@
 import React, { Fragment } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux'
-import { signInFunc } from '../actions/actions'
+import { logInFunc } from '../actions/actions'
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import {Button, TextField} from '@material-ui/core';
 import styles from '../style/css/style'
 
 const validate = ( values ) => {
     const errors = {}
-    if (!values.login) {
-      errors.login = 'Required'
+    if (!values.password) {
+      errors.password = 'Required'
     } 
     if (!values.email) {
       errors.email = 'Required'
@@ -27,37 +26,31 @@ const input = ( props ) => {
             <TextField {...props.input} 
                   type={props.type} 
                   placeholder={props.placeholder} 
-                  value={props.value}
-                  style={styles.textField} 
-                  InputProps={{
-                    style: {
-                        color: "#f5f5f5",
-                        fontFamily: "Comic Sans MS",
-                        fontSize: 16
-                    }
-                  }} />
-            {/* сначала проверяет, где есть какие-либо данные, хранящиеся внутри объекта error. 
-            Если это так, он проверяет, взаимодействовал ли пользователь с полем ввода. 
-            Если это так, то приложение вернет данные, хранящиеся внутри объекта error. */}
-            {meta.error && meta.touched && <div style={styles.errorField}>{meta.error}</div>}
+                  value={props.value} 
+                  variant="outlined" 
+                  fullWidth />
+          
+            {meta.error && meta.touched && <div>{meta.error}</div>}
         </Fragment>
     )
 }
 
 let LoginForm = ( props ) => {
-  const { pristine, submitting, signInFunc  } = props;
+  const { pristine, submitting, logInFunc } = props;
   return (
-      <form onSubmit={ (e)=>{ signInFunc(e.target.elements.email.value, e.target.elements.password.value )}} 
-            autoComplete="off" >
+      <form onSubmit={(e)=>{ logInFunc(e.target.elements.email.value, 
+                                       e.target.elements.password.value ); 
+                                       e.preventDefault();}} 
+            style={styles.formContainer}  >
 
-        <div style={styles.inputBox}>
+        <div style={styles.input}>
           <Field name="email" 
                  component={input} 
                  label="email" 
                  type="text"
                  placeholder="email" /> 
         </div>
-        <div style={styles.inputBox}>
+        <div style={styles.input}>
           <Field name="password" 
                  component={input} 
                  label="password" 
@@ -65,10 +58,7 @@ let LoginForm = ( props ) => {
                  placeholder="password" /> 
         </div>
         <div>
-          <Button type="submit" 
-                  disabled={pristine || submitting}  
-                  fullWidth 
-                  variant="contained" >Log IN</Button>
+          <Button type="submit" variant="contained" color="primary" fullWidth disabled={pristine || submitting} >Log IN</Button>
         </div>
       </form>
   )
@@ -79,4 +69,4 @@ LoginForm = reduxForm({
   validate,
 })(LoginForm);
 
-export default connect( null, { signInFunc } )( LoginForm );
+export default connect( null, { logInFunc } )( LoginForm );

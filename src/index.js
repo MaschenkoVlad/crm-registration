@@ -13,6 +13,7 @@ const rootReducer = combineReducers({
   reducer: reducer
 })
 
+// redux-thunk для обработки AJAX или сетевых запросов через redux
 const compose = composeWithDevTools(applyMiddleware(thunk));
 const store = createStore(rootReducer, compose);
 
