@@ -1,15 +1,18 @@
 import axios from 'axios';
 
-export const registerUser = (user) => dispatch => {
-    axios.post('/api/users/register', user)
-        .then((res)=>{ console.log('res') })
-        .catch((err)=>{console.log(`ERROR ${err}`)})
+export const registerUserToServer = ( user ) => {
+    return axios.post('/api/users/register', user)
 }
 
-export const loginUser = (user) => dispatch => {
-    axios.post('/api/users/login', user)
-        .then((res)=>{ console.log('res') })
-        .catch((err)=>{console.log(`ERROR ${err}`)})
+export const loginUserToServer = ( user )  => {
+    return axios.post('/api/users/login', user)
 }
 
-//from this file we will send an AJAX request to the node.js server
+export const setAuthToken = ( token ) => {
+    if ( token ) {
+        axios.defaults.headers.common['Auth'] = token;
+    }
+    else {
+        delete axios.defaults.headers.common['Auth'];
+    }
+}

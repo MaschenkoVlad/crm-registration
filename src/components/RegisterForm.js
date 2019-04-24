@@ -1,79 +1,65 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux'
 import { signInFunc } from '../actions/actions'
 
+import validate from '../validate/validate'
 import {Button, TextField} from '@material-ui/core';
 import styles from '../style/css/style'
 
-const validate = ( values ) => {
-    const errors = {}
-    if (!values.login) {
-      errors.login = 'Required'
-    } 
-    if (!values.email) {
-      errors.email = 'Required'
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address'
-    }
-    return errors
-  }
-
 const input = ( props ) => {
-    const { meta } = props;
     return (
-        <Fragment>
-            <TextField {...props.input} 
+       <TextField {...props.input} 
                   type={props.type} 
                   placeholder={props.placeholder} 
                   value={props.value}  
-                  variant="outlined" />
-                  
-            {meta.error && meta.touched && <div>{meta.error}</div>}
-        </Fragment>
+                  variant="outlined" 
+                  label="Required"
+                  fullWidth />
     )
 }
 
 let RegistrForm = ( props ) => {
-  const { pristine, submitting, signInFunc  } = props;
+  const { valid, signInFunc } = props;
   return (
       <form onSubmit={(e)=>{ signInFunc(e.target.elements.name.value, 
                                         e.target.elements.email.value,
                                         e.target.elements.password.value, 
-                                        e.target.elements.password_confirm.value,
-                                        ); e.preventDefault();}} 
-            style={styles.formContainer}>
+                                        e.target.elements.password_confirm.value)}} 
+            style={styles.formContainer}
+            autoComplete="off">
 
         <div style={styles.input}>
           <Field name="name" 
                  component={input} 
-                 label="name" 
                  type="text"
-                 placeholder="name" /> 
+                 placeholder="Name" /> 
         </div>
         <div style={styles.input}>
           <Field name="email" 
                  component={input} 
-                 label="email" 
                  type="text"
-                 placeholder="email" /> 
+                 placeholder="Email" /> 
         </div>
         <div style={styles.input}>
           <Field name="password" 
                  component={input} 
-                 label="password" 
                  type="password"
-                 placeholder="password" /> 
+                 placeholder="Password" /> 
         </div>
         <div style={styles.input}>
           <Field name="password_confirm" 
-                 component={input} 
-                 label="password_confirm" 
+                 component={input}  
                  type="password" 
-                 placeholder="password_confirm" />
+                 placeholder="Confirm Password" />
         </div>
         <div>
-          <Button type="submit" variant="contained" color="primary" fullWidth disabled={pristine || submitting} >SIGN IN</Button>
+          <Button type="submit" 
+                  variant="contained" 
+                  color="primary" 
+                  fullWidth 
+                  disabled={ valid ? false : true } 
+          >SIGN IN</Button>
         </div>
       </form>
   )

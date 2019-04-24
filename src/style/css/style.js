@@ -4,6 +4,9 @@ const styles = {
   },
   formContainer: {
     padding: 24,
+  },
+  button: {
+    marginRight:12
   }
 }
 
