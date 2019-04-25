@@ -1,58 +1,60 @@
 import {createAction, handleActions, combineActions} from 'redux-actions';
-import { registerUserToServer, loginUserToServer } from '../actions/authentication'
+import { registerUser, loginUser, getData } from '../actions/authentication'
 
 const signIn = createAction('SIGN_IN');
 const logIn = createAction('LOG_IN');
-const signInToServer = createAction('REGISTER_TO_SERVER');
-const logInToServer= createAction('LOGIN_TO_SERVER');
+const fetchData = createAction('FETCH_DATA')
 
 export const signInFunc = ( ...user ) => async dispatch => {
-  registerUserToServer({...user})
+  registerUser({...user})
     .then((res) => {
-      console.log(' registerUserToServer: ', res.data);
-      dispatch( signInToServer( {...user} ) ) 
+      dispatch(signIn( res.data ))
     })
-    .catch((err) => {console.log(`Error ${err}`)})
-  dispatch(signIn( ...user ))
+    .catch((err) => {
+      throw(err)
+    })
 };
+
 export const logInFunc = ( ...user ) => async dispatch => {
-  loginUserToServer({...user})
+  loginUser({...user})
     .then((res) => {
-      console.log(' loginUserToServer ', res.data);
-      dispatch( logInToServer( {...user} ) ) 
+      dispatch(logIn( res.data ))
     })
-    .catch((err) => {console.log(`Error ${err}`)})
-  dispatch(logIn( ...user ))
+    .catch((err) => {
+      throw(err)
+    })
 };
+
+export const fetchAllData = ( ) => async dispatch => {
+  getData()
+    .then((res)=>{
+      dispatch(fetchData(res.data))
+    })
+    .catch((err)=>{
+      throw(err)
+    })
+}
 
 const initialState = {
   formData: [],
 };
 
-const reducer = handleActions(
+export const reducer = handleActions(
   {
-    [combineActions(signIn, logIn, signInToServer, logInToServer)]: (state, {payload}) => ({
+    [combineActions(signIn, logIn, fetchData)]: (state, {payload}) => ({
       ...state,
       formData: [...state.formData, payload]
-    })
-    // [signIn]: (state, {payload}) => ({
-    //   ...state,
-    //   formData: [...state.formData, payload]
-    // }),
-    // [logIn]: (state, {payload}) => ({
-    //   ...state,
-    //   formData: [...state.formData, payload]
-    // }),
-    // [signInToServer]: (state, {payload}) => ({ 
-    //   ...state,
-    //   formData: [...state.formData, payload]
-    // }),
-    // [logInToServer]: (state, {payload}) => ({ 
-    //   ...state,
-    //   formData: [...state.formData, payload]
-    // }),
+    }),
+  //   [signIn]: (state, {payload}) => ({
+  //     ...state,
+  //     formData: [...state.formData, payload]
+  //   }),
+  //   [logIn]: (state, {payload}) => ({
+  //     ...state,
+  //     formData: [...state.formData, payload]
+  //   }),
   },
   initialState,
 );
 
-export default reducer;
+// export default reducer;

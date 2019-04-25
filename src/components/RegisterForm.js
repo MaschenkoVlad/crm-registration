@@ -58,7 +58,7 @@ let RegistrForm = ( props ) => {
                   variant="contained" 
                   color="primary" 
                   fullWidth 
-                  disabled={ valid ? false : true } 
+                  disabled={ valid ? false : true } //meta
           >SIGN IN</Button>
         </div>
       </form>

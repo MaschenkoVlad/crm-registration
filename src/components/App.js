@@ -8,6 +8,7 @@ import Home from './Home';
 import { Grid, Paper } from '@material-ui/core';
 
 class App extends React.Component {
+
     render() {
         return (
             <Router>

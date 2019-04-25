@@ -24,7 +24,7 @@ let LoginForm = ( props ) => {
   return (
       <form onSubmit={(e)=>{  logInFunc(e.target.elements.email.value, 
                                        e.target.elements.password.value )}} 
-            style={styles.formContainer}  
+            style={styles.formContainer}
             autoComplete="off" >
 
         <div style={styles.input}>
@@ -44,7 +44,7 @@ let LoginForm = ( props ) => {
                   variant="contained" 
                   color="primary" 
                   fullWidth 
-                  disabled={ valid ? false : true } 
+                  disabled={ valid ? false : true } //meta
           >Log IN</Button>
         </div>
       </form>

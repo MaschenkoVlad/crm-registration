@@ -3,7 +3,7 @@ const styles = {
     marginBottom: 24
   },
   formContainer: {
-    padding: 24,
+    padding: "24px 34px",
   },
   button: {
     marginRight:12

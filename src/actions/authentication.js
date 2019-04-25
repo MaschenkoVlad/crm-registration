@@ -1,18 +1,15 @@
 import axios from 'axios';
 
-export const registerUserToServer = ( user ) => {
-    return axios.post('/api/users/register', user)
+const apiUrl = 'http://localhost:3000'
+
+export const registerUser = ( newUser ) => {
+    return axios.post(`${apiUrl}/register`, newUser)
 }
 
-export const loginUserToServer = ( user )  => {
-    return axios.post('/api/users/login', user)
+export const loginUser = ( user )  => {
+    return axios.post(`${apiUrl}/login`, user)
 }
 
-export const setAuthToken = ( token ) => {
-    if ( token ) {
-        axios.defaults.headers.common['Auth'] = token;
-    }
-    else {
-        delete axios.defaults.headers.common['Auth'];
-    }
+export const getData = () => {
+    return axios.get(`${apiUrl}`)
 }

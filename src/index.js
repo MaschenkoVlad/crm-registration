@@ -6,16 +6,17 @@ import App from './components/App';
 import thunk from 'redux-thunk';
 import { reducer as formReducers } from "redux-form";
 import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
-import reducer from './actions/actions';
+import {reducer, fetchAllData } from './actions/actions';
 
 const rootReducer = combineReducers({
   form: formReducers,
   reducer: reducer
 })
-
 // redux-thunk для обработки AJAX или сетевых запросов через redux
 const compose = composeWithDevTools(applyMiddleware(thunk));
 const store = createStore(rootReducer, compose);
+
+store.dispatch(fetchAllData());
 
 render(
   <Provider store={store}>
