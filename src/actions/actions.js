@@ -1,37 +1,42 @@
 import {createAction, handleActions, combineActions} from 'redux-actions';
-import { registerUser, loginUser, getData } from '../actions/authentication'
+import { registerUser, loginUser, getData } from '../actions/authentication';
 
 const signIn = createAction('SIGN_IN');
 const logIn = createAction('LOG_IN');
-const fetchData = createAction('FETCH_DATA')
+const fetchData = createAction('FETCH_DATA');
 
 export const signInFunc = ( ...user ) => async dispatch => {
-  registerUser({...user})
+  console.log(user);
+  registerUser(user)
     .then((res) => {
-      dispatch(signIn( res.data ))
+      console.log(res.data);
+      dispatch(signIn( res.data ));
     })
     .catch((err) => {
-      throw(err)
+      console.log(JSON.stringify(err))
     })
 };
 
 export const logInFunc = ( ...user ) => async dispatch => {
-  loginUser({...user})
+  console.log(user);
+  loginUser({user})
     .then((res) => {
+      console.log(res.data)
       dispatch(logIn( res.data ))
     })
     .catch((err) => {
-      throw(err)
+      console.log(JSON.stringify(err))
     })
 };
 
 export const fetchAllData = ( ) => async dispatch => {
   getData()
-    .then((res)=>{
+    .then((res) => {
+      console.log(res.data)
       dispatch(fetchData(res.data))
     })
-    .catch((err)=>{
-      throw(err)
+    .catch((err) => {
+      console.log(JSON.stringify(err))
     })
 }
 
@@ -56,5 +61,4 @@ export const reducer = handleActions(
   },
   initialState,
 );
-
 // export default reducer;

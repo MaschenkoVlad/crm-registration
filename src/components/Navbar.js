@@ -13,10 +13,10 @@ class Navbar extends Component {
                         <Link to="/">Home</Link>
                     </Button>
                     <Button variant="contained" color="default" style={styles.button}>
-                        <Link to="/login">Log in</Link>
+                        <Link to="/login">Log in</Link> 
                     </Button>
                     <Button variant="contained" color="default" style={styles.button}>
-                        <Link to="/register">Sign in</Link>
+                        <Link to="/register">Sign in</Link> 
                     </Button>
                 </Toolbar>
             </AppBar>    

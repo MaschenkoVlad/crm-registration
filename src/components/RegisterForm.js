@@ -1,11 +1,11 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux'
-import { signInFunc } from '../actions/actions'
+import { connect } from 'react-redux';
+import { signInFunc } from '../actions/actions';
 
-import validate from '../validate/validate'
+import validate from '../validate/validate';
 import {Button, TextField} from '@material-ui/core';
-import styles from '../style/css/style'
+import styles from '../style/css/style';
 
 const input = ( props ) => {
     return (
@@ -22,10 +22,11 @@ const input = ( props ) => {
 let RegistrForm = ( props ) => {
   const { valid, signInFunc } = props;
   return (
-      <form onSubmit={(e)=>{ signInFunc(e.target.elements.name.value, 
-                                        e.target.elements.email.value,
-                                        e.target.elements.password.value, 
-                                        e.target.elements.password_confirm.value)}} 
+      <form onSubmit={(e) => { signInFunc(e.target.elements.name.value, 
+                                          e.target.elements.email.value,
+                                          e.target.elements.password.value, 
+                                          e.target.elements.password_confirm.value);
+                                          e.preventDefault()}} 
             style={styles.formContainer}
             autoComplete="off">
 

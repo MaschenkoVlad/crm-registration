@@ -4,11 +4,9 @@ import Navbar from './Navbar';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 import Home from './Home';
-
 import { Grid, Paper } from '@material-ui/core';
 
 class App extends React.Component {
-
     render() {
         return (
             <Router>

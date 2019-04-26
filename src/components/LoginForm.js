@@ -1,11 +1,11 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux'
-import { logInFunc } from '../actions/actions'
+import { connect } from 'react-redux';
+import { logInFunc } from '../actions/actions';
 
-import validate from '../validate/validate'
+import validate from '../validate/validate';
 import {Button, TextField} from '@material-ui/core';
-import styles from '../style/css/style'
+import styles from '../style/css/style';
 
 const input = ( props ) => {
     return (
@@ -22,8 +22,9 @@ const input = ( props ) => {
 let LoginForm = ( props ) => {
   const { valid, logInFunc } = props;
   return (
-      <form onSubmit={(e)=>{  logInFunc(e.target.elements.email.value, 
-                                       e.target.elements.password.value )}} 
+      <form onSubmit={(e) => {  logInFunc(e.target.elements.email.value, 
+                                          e.target.elements.password.value );
+                                          e.preventDefault()}} 
             style={styles.formContainer}
             autoComplete="off" >
 

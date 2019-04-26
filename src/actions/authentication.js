@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-const apiUrl = 'http://localhost:3000'
+const apiUrl = 'http://localhost:5000';
 
 export const registerUser = ( newUser ) => {
-    return axios.post(`${apiUrl}/register`, newUser)
+    return axios.post(`${apiUrl}/auth/register`, newUser)
 }
 
 export const loginUser = ( user )  => {
-    return axios.post(`${apiUrl}/login`, user)
+    return axios.post(`${apiUrl}/auth/login`, user )
 }
 
 export const getData = () => {
-    return axios.get(`${apiUrl}`)
+    return axios.get(`${apiUrl}/auth`)
 }
