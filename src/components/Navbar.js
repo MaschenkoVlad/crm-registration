@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-
 import { AppBar, Toolbar, Button } from '@material-ui/core';
 import styles from '../style/css/style'
 
